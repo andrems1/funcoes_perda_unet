@@ -1,0 +1,26 @@
+# ===== Dados (não versionados: tamanho e licença do OralEpitheliumDB) =====
+datasets/
+*.zip
+
+# ===== Saídas de treino: pesos, figuras e execuções =====
+saida/
+pesos/
+*.h5
+*.weights.h5
+
+# ===== Jupyter / Python =====
+.ipynb_checkpoints/
+.virtual_documents/
+__pycache__/
+*.py[cod]
+
+# ===== Ambiente =====
+.env
+.venv/
+env/
+venv/
+
+# ===== Sistema =====
+.DS_Store
+Thumbs.db
+desktop.ini
