@@ -20,7 +20,8 @@ desenvolvido por Freitas (2025).
 | Arquivo | Descrição |
 |---|---|
 | `Unet_ProtoSeg.ipynb` | **Notebook principal.** Contém as funções de perda implementadas, o treinamento e a avaliação. A seleção da função de perda é feita pela variável `LOSS_FN`; o modo do ProtoSeg, por `protoseg_online`. Foi adaptado para: (i) permitir a troca da função de perda, (ii) usar a função selecionada também no modo sem ProtoSeg, e (iii) padronizar o salvamento por `run_id` (função + modo + semente). |
-| `ProtoSeg_Camadas.ipynb` | Análise do SA Score por camada da rede. Adaptado para reconstruir a U-Net e carregar os pesos salvos (`load_weights`), em vez de carregar o modelo completo. |
+| `ProtoSeg_Camadas.ipynb` | Análise do SA Score por camada da rede. Adaptado para reconstruir a U-Net e carregar os pesos salvos (`load_weights`), em vez de carregar o modelo completo, ler as imagens em RGB e avaliar os modelos com e sem ProtoSeg sobre o mesmo lote de imagens de teste. |
+| `Exportar_Mascaras.ipynb` | Criado neste trabalho. Aplica os pesos de cada execução a todo o conjunto de teste e salva as máscaras preditas publicadas no Zenodo. |
 
 ## Notebooks do pipeline base, utilizados na preparação dos dados
 
@@ -39,7 +40,10 @@ direto nos experimentos deste trabalho**: `Teste_Modelos.ipynb`,
 
 | Arquivo | Descrição |
 |---|---|
-| `resultados_experimentos.csv` | Registro de todas as execuções, com as métricas de avaliação por treino. Base para as tabelas apresentadas no texto do TCC. |
+| `resultados_experimentos.csv` | Registro das 54 execuções, com as métricas de avaliação por treino. Base para as tabelas apresentadas no texto do TCC. Duas execuções interrompidas da BCE (semente 42, 17/07/2026) foram removidas. |
+
+As máscaras preditas por cada execução sobre o conjunto de teste estão disponíveis no Zenodo:
+[https://doi.org/10.5281/zenodo.23602713](https://doi.org/10.5281/zenodo.23602713)
 
 ---
 
@@ -64,7 +68,8 @@ Combinações e variações de aprimoramento:
 
 ## Protocolo experimental
 
-- 200 épocas por treinamento; três sementes (42, 123 e 2024) para as configurações estáveis.
+- 200 épocas por treinamento; três sementes (42, 123 e 2024) para as configurações estáveis
+  e semente única (42) para as que colapsaram (Dice, Tversky e Focal Tversky).
 - Cada função avaliada com e sem o módulo ProtoSeg, totalizando 54 treinamentos.
 - Arquitetura, conjunto de dados e demais hiperparâmetros mantidos fixos.
 - Métricas: Dice, IoU, acurácia, precisão, recall, Panoptic Quality (PQ) e AJI.
